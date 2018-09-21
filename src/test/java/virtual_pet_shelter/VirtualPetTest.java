@@ -19,9 +19,9 @@ public class VirtualPetTest {
 
 	@Test
 	public void shouldHaveAllInstances() {
-		VirtualPet underTest = new VirtualPet("", "", 0, 0, 0);
+		VirtualPet underTest = new VirtualPet("", "", 0, 0, 0, 0);
 		String test = underTest.displayStats();
-		Assert.assertEquals("  0 0 0", test);
+		Assert.assertEquals("  0 0 0 0", test);
 	}
 
 	@Test
@@ -161,11 +161,12 @@ public class VirtualPetTest {
 	}
 
 	@Test
-	public void twoPetsDifferentId() {
-		VirtualPet pet1 = new VirtualPet("Stan");
-		VirtualPet pet2 = new VirtualPet("Sheldon");
-		String iD1 = pet1.getID();
-		String iD2 = pet2.getID();
-		Assert.assertNotEquals(iD1, iD2);
+	public void shouldBeDead() {
+		VirtualPet underTest = new VirtualPet("Sandy");
+		for (int i = 0; i <= 15; i++) {
+			underTest.tick();
+		}
+		boolean actual = underTest.isDead();
+		Assert.assertEquals(true, actual);
 	}
 }

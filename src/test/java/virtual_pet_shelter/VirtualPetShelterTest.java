@@ -55,8 +55,47 @@ public class VirtualPetShelterTest {
 	public void shouldAdoptOut() {
 		VirtualPetShelter underTest = new VirtualPetShelter();
 		underTest.takeIn("Cuddles");
-		underTest.giveId("Cuddles");
-		underTest.adoptOut();
+		underTest.adoptOut("Cuddles");
+		Map<String, VirtualPet> test = underTest.getAllPets();
+		Assert.assertEquals(true, test.isEmpty());
 
 	}
+
+	@Test
+	public void shouldPlayWithIndividual() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.takeIn("Cuddles");
+		underTest.takeIn("Checkers");
+		VirtualPet checkers = underTest.getPet("Checkers");
+		VirtualPet cuddles = underTest.getPet("Cuddles");
+		underTest.playWithPet("Checkers");
+		Assert.assertEquals(3, cuddles.getRestlessness() - checkers.getRestlessness());
+
+	}
+
+	@Test
+	public void shouldTick() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		underTest.takeIn("Cuddles");
+		underTest.takeIn("Checkers");
+		VirtualPet checkers = underTest.getPet("Checkers");
+		VirtualPet cuddles = underTest.getPet("Cuddles");
+		underTest.tick();
+		Assert.assertEquals(12, checkers.getHunger() + cuddles.getHunger());
+	}
+
+	@Test
+	public void shouldBeOpen() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		for (int i = 0; i <= 15; i++) {
+			underTest.takeIn("Cuddles");
+			for (int j = 0; j <= 15; j++) {
+				underTest.tick();
+			}
+		}
+		underTest.tick();
+		boolean actual = underTest.isOpen();
+		Assert.assertEquals(false, actual);
+	}
+
 }

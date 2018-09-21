@@ -1,20 +1,21 @@
 package virtual_pet_shelter;
 
-import java.util.UUID;
-
 public class VirtualPet {
 	private String name;
 	private String description;
 	private int hunger;
 	private int restlessness;
 	private int thirst;
-	private boolean gameOver = false;
+	private boolean dead = false;
 	private int happiness;
-	private String iD;
 
 	// accessors
 	public String getName() {
 		return name;
+	}
+
+	public int getHappiness() {
+		return happiness;
 	}
 
 	public int getHunger() {
@@ -30,7 +31,7 @@ public class VirtualPet {
 	}
 
 	public boolean isGameOver() {
-		return gameOver;
+		return dead;
 	}
 
 	public boolean isHappy() {
@@ -41,15 +42,9 @@ public class VirtualPet {
 		}
 	}
 
-	public String getID() {
-		return iD;
-	}
-
 	// constructors
 	public VirtualPet(String newName) {
-		iD = UUID.randomUUID().toString();
 		name = newName;
-		// TODO
 		description = "Nice guy";
 		hunger = 5;
 		restlessness = 5;
@@ -59,7 +54,7 @@ public class VirtualPet {
 	}
 
 	public VirtualPet(String newName, String newDescription) {
-		iD = UUID.randomUUID().toString();
+
 		name = newName;
 		description = newDescription;
 		hunger = 5;
@@ -70,7 +65,7 @@ public class VirtualPet {
 	}
 
 	public VirtualPet(String newName, String newDescription, int newHunger, int newRest, int newThirst) {
-		iD = UUID.randomUUID().toString();
+
 		name = newName;
 		description = newDescription;
 		hunger = newHunger;
@@ -82,7 +77,8 @@ public class VirtualPet {
 	// funtimes
 	public String displayStats() {
 
-		return name + " " + description + " " + hunger + " " + restlessness + " " + thirst;
+		return name + "\r" + description + "\rHunger: " + hunger + " || Restlessness: " + restlessness + " || Thirst: "
+				+ thirst + " || Happiness: " + happiness;
 	}
 
 	public void tick() {
@@ -112,29 +108,29 @@ public class VirtualPet {
 	}
 
 	private void runAway() {
-		gameOver = true;
+		dead = true;
 
 	}
 
 	private void overStimulated() {
-		gameOver = true;
+		dead = true;
 	}
 
 	private void crumbleToDust() {
-		gameOver = true;
+		dead = true;
 
 	}
 
 	public void getsFat() {
-		gameOver = true;
+		dead = true;
 	}
 
 	public void starve() {
-		gameOver = true;
+		dead = true;
 	}
 
 	public void drown() {
-		gameOver = true;
+		dead = true;
 	}
 
 	public void feedPet() {
@@ -147,6 +143,10 @@ public class VirtualPet {
 
 	public void waterPet() {
 		thirst -= 3;
+	}
+
+	public boolean isDead() {
+		return dead;
 	}
 
 }
