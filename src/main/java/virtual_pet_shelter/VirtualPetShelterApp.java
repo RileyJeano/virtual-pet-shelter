@@ -8,11 +8,9 @@ public class VirtualPetShelterApp {
 	public static void main(String[] args) {
 		VirtualPetShelter shelter = new VirtualPetShelter();
 		Scanner input = new Scanner(System.in);
-		String[] deathDescriptions = { "", "Oh no! You're beloved pet has run away",
-				"Oh no! You're beloved pet has become overstimulated",
-				"Oh no! You're beloved wasn't watered and now it's crumbled to dust",
-				"Oh no! You're beloved pet has gotten too fat", "Oh no! You're beloved pet has starved",
-				"Oh no! You're beloved pet has drowned" };
+		String[] deathDescriptions = { "", " has run away", " has become overstimulated",
+				" wasn't watered and now it's crumbled to dust", " has gotten too fat", " has starved",
+				" has drowned" };
 
 		System.out.println("One day, you find yourself wanting to make a difference in the world.");
 		System.out.println("While wandering and pondering your true calling, you come across a direlict building.");
@@ -31,7 +29,9 @@ public class VirtualPetShelterApp {
 
 		}
 		if (shelter.shelterCloses == true) {
-			System.out.println("The polcie come down and shut down the shelter");
+
+			System.out.println(
+					"\nOh no! You're murderous pet rampage has caused the cops to be called. Our once proud shelter has now been closed for rock cruelty.");
 		}
 	}
 
@@ -44,10 +44,10 @@ public class VirtualPetShelterApp {
 				+ "2. Water the pets\r\n" + "3. Play with the pets\r\n" + "4. Put a pet up for adoption\r\n"
 				+ "5. Admit a new pet\r\n" + "6. Exit");
 		shelter.tick();
-
 		int deathDescription = shelter.deathDescription();
+		String deathDanme = shelter.deadName();
 
-		System.out.println(deathDescrip[deathDescription]);
+		System.out.println("\n" + deathDanme + deathDescrip[deathDescription]);
 
 		String userChoice = input.nextLine();
 		userChoice(shelter, userChoice, input);

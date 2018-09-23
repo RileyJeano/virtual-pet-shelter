@@ -12,6 +12,7 @@ public class VirtualPetShelter {
 	private boolean open = true;
 	public boolean shelterCloses = false;
 	public int deathDecision = 0;
+	public String deadName = "";
 
 	public void addPet(VirtualPet newPet) {
 		pets.put(newPet.getName(), newPet);
@@ -75,6 +76,7 @@ public class VirtualPetShelter {
 				deaths++;
 				deadList.add(currentPet.getKey());
 				deathDecision = currentPet.getValue().deathDiscription;
+				deadName = currentPet.getValue().getName();
 
 			}
 		}
@@ -90,6 +92,10 @@ public class VirtualPetShelter {
 
 	public int deathDescription() {
 		return deathDecision;
+	}
+
+	public String deadName() {
+		return deadName;
 	}
 
 	public boolean isOpen() {
