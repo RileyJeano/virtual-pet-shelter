@@ -1,8 +1,6 @@
 package virtual_pet_shelter;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -98,4 +96,39 @@ public class VirtualPetShelterTest {
 		Assert.assertEquals(false, actual);
 	}
 
+	@Test
+	public void shouldRemoveAPetThatsDied() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		VirtualPet pet1 = new VirtualPet("Cuddles", "", 10, 10, 10);
+		VirtualPet pet2 = new VirtualPet("Checkers", "", 10, 10, 10);
+		underTest.addPet(pet1);
+		underTest.addPet(pet2);
+		underTest.tick();
+		Assert.assertEquals(true, underTest.isEmpty());
+
+	}
+
+	@Test
+	public void shouldNotRemoveAPetYouDontHave() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		VirtualPet pet1 = new VirtualPet("Cuddles", "", 0, 0, 0);
+		VirtualPet pet2 = new VirtualPet("Checkers", "", 0, 0, 0);
+		underTest.addPet(pet1);
+		underTest.addPet(pet2);
+
+		underTest.adoptOut("foo");
+
+		Assert.assertEquals(2, underTest.getAllPets().size());
+	}
+
+	@Test
+	public void shouldRemoveDeadPet() {
+		VirtualPetShelter underTest = new VirtualPetShelter();
+		VirtualPet pet = new VirtualPet("Sandy", "cool rock", 0, 0, 0);
+		underTest.addPet(pet);
+		pet.feedPet();
+		underTest.tick();
+		Assert.assertEquals(0, underTest.getAllPets().size());
+
+	}
 }

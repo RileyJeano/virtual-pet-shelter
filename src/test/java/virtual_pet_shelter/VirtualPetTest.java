@@ -1,9 +1,5 @@
 package virtual_pet_shelter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,16 +15,20 @@ public class VirtualPetTest {
 
 	@Test
 	public void shouldHaveAllInstances() {
-		VirtualPet underTest = new VirtualPet("", "", 0, 0, 0, 0);
+		VirtualPet underTest = new VirtualPet("", "", 0, 0, 0);
 		String test = underTest.displayStats();
-		Assert.assertEquals("  0 0 0 0", test);
+		Assert.assertEquals(underTest.getName() + "\r" + underTest.getDescription() + "\rHunger: "
+				+ underTest.getHunger() + " || Restlessness: " + underTest.getRestlessness() + " || Thirst: "
+				+ underTest.getThirst() + " || Happiness: " + underTest.getHappiness(), test);
 	}
 
 	@Test
 	public void shouldHaveNameAndDescription() {
 		VirtualPet underTest = new VirtualPet("Chuck", "Cool Rock");
 		String test = underTest.displayStats();
-		Assert.assertEquals("Chuck Cool Rock 5 5 5", test);
+		Assert.assertEquals(underTest.getName() + "\r" + underTest.getDescription() + "\rHunger: "
+				+ underTest.getHunger() + " || Restlessness: " + underTest.getRestlessness() + " || Thirst: "
+				+ underTest.getThirst() + " || Happiness: " + underTest.getHappiness(), test);
 	}
 
 	@Test
@@ -168,5 +168,17 @@ public class VirtualPetTest {
 		}
 		boolean actual = underTest.isDead();
 		Assert.assertEquals(true, actual);
+	}
+
+	@Test
+	public void shouldHaveADescription() {
+		VirtualPet underTest = new VirtualPet("Metamorph", "test", 0, 0, 0);
+		Assert.assertEquals("test", underTest.getDescription());
+	}
+
+	@Test
+	public void shouldGenerateRandomDescription() {
+		VirtualPet underTest = new VirtualPet("Rocky Horror");
+		Assert.assertNotEquals("", underTest.getDescription());
 	}
 }
